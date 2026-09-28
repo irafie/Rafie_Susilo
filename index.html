@@ -5,296 +5,265 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rafie Susilo | AI, Computer Vision & Quant Projects</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eef1f6;--panel:#fff;--ink:#101a2e;--mute:#56617a;--line:#d5dbe7;--acc:#2d4bff;--acc-ink:#fff;--hi:#ffb000;
---sans:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+:root{--bg:#f6f5fb;--ink:#12142a;--mute:#5b6080;--line:#dcdcea;--card:#fff;--a:#5b3df5;--b:#e8324f;--glass:#ffffffb8;
+--d:"Unbounded","Arial Black",system-ui,sans-serif;--s:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1020;--panel:#121a2e;--ink:#e9eefb;--mute:#93a0bd;--line:#26314d;--acc:#7f93ff;--acc-ink:#0a1020;--hi:#ffc233}}
-:root[data-theme="dark"]{--bg:#0a1020;--panel:#121a2e;--ink:#e9eefb;--mute:#93a0bd;--line:#26314d;--acc:#7f93ff;--acc-ink:#0a1020;--hi:#ffc233}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0c16;--ink:#eef0fb;--mute:#98a0bd;--line:#232842;--card:#ffffff0a;--a:#8b7bff;--b:#ff6b81;--glass:#0a0c16b8}}
+:root[data-theme="dark"]{--bg:#0a0c16;--ink:#eef0fb;--mute:#98a0bd;--line:#232842;--card:#ffffff0a;--a:#8b7bff;--b:#ff6b81;--glass:#0a0c16b8}
 *,*::before,*::after{box-sizing:inherit}
-html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--acc);outline-offset:3px;border-radius:4px}
-.wrap{display:grid;grid-template-columns:320px minmax(0,1fr);max-width:1240px;margin:0 auto}
-aside{position:sticky;top:0;align-self:start;height:100vh;padding:48px 36px;display:flex;flex-direction:column;gap:28px;border-right:1px solid var(--line)}
-.logo{width:56px;height:56px;border-radius:50%;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font-weight:800;font-size:22px}
-aside h1{font-size:34px;line-height:1.05;margin:0;font-weight:800;letter-spacing:-.02em}
-aside p{margin:0;color:var(--mute);font-size:15px}
-nav{display:flex;flex-direction:column;gap:6px}
-nav a{text-decoration:none;padding:6px 0;font-weight:600;border-bottom:2px solid transparent;width:max-content}
-nav a:hover{border-color:var(--acc)}
-.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;font-size:15px}
-.status{display:inline-flex;gap:8px;align-items:center;font-size:14px;font-weight:600}
-.status i{width:10px;height:10px;border-radius:50%;background:#20c26b;box-shadow:0 0 0 0 #20c26b88;animation:pulse 2s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 9px #20c26b00}100%{box-shadow:0 0 0 0 #20c26b00}}
-.btn{font:inherit;font-weight:600;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-block;width:max-content}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-.btn:hover{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
-main{padding:64px 48px 96px}
-.lead{font-size:clamp(34px,5.2vw,64px);line-height:1.02;font-weight:800;letter-spacing:-.03em;margin:0 0 24px;max-width:15em}
-.lead em{font-style:normal;background:linear-gradient(transparent 62%,var(--hi) 62% 92%,transparent 92%)}
-.sub{color:var(--mute);max-width:36em;margin:0 0 40px}
-.stats{display:flex;flex-wrap:wrap;gap:12px 40px;margin:0 0 72px;padding:20px 0;border-block:1px solid var(--line)}
-.stats div{display:flex;flex-direction:column}
-.stats b{font-family:var(--mono);font-size:26px;font-weight:500}
-.stats span{font-size:14px;color:var(--mute)}
-h2{font-size:30px;letter-spacing:-.02em;margin:0 0 8px;font-weight:800}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 28px}
-.filters button{font:inherit;font-size:15px;font-weight:600;padding:7px 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
-.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.proj{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:0 0 16px;overflow:hidden}
-.proj[hidden]{display:none}
-.proj summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:24px 28px;align-items:start}
-.proj summary::-webkit-details-marker{display:none}
-.proj h3{margin:0;font-size:24px;font-weight:800;letter-spacing:-.015em}
-.proj .one{grid-column:1;margin:4px 0 0;color:var(--mute);font-size:16px}
-.metric{grid-column:2;grid-row:1/3;text-align:right;font-family:var(--mono)}
-.metric b{display:block;font-size:30px;font-weight:500;color:var(--acc);line-height:1.1}
-.metric span{font-size:13px;color:var(--mute)}
-.tags{grid-column:1/3;display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.tags span{font-size:13.5px;padding:2px 10px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
-.plus{grid-column:1/3;font-size:14px;font-weight:600;color:var(--acc)}
-.plus::after{content:"Read the case study"}
-.proj[open] .plus::after{content:"Close"}
-.body{padding:4px 28px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px dashed var(--line);padding-top:24px}
-.body h4{margin:0 0 6px;font-size:15px;color:var(--acc)}
-.body p{margin:0;font-size:15.5px}
-.body .links{grid-column:1/-1;display:flex;gap:10px}
-.lite{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-.lite div{padding:18px;border:1px solid var(--line);border-radius:10px}
-.lite b{display:block;margin-bottom:4px}
-.lite p{margin:0;font-size:15px;color:var(--mute)}
-section{margin-top:88px}
-.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 40px;margin-top:20px}
-.skills h4{margin:0 0 6px;font-size:16px}
-.skills p{margin:0;color:var(--mute)}
-.tl{list-style:none;margin:20px 0 0;padding:0;border-left:2px solid var(--line)}
-.tl li{padding:0 0 22px 24px;position:relative}
-.tl li::before{content:"";position:absolute;left:-7px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--acc)}
-.tl b{display:block}
-.tl span{color:var(--mute);font-size:15px}
-.contact{padding:40px;border-radius:18px;background:var(--acc);color:var(--acc-ink)}
-.contact h2{font-size:clamp(28px,4vw,44px);max-width:14em}
-.contact p{max-width:34em;margin:0 0 22px}
-.contact .btn{background:var(--acc-ink);color:var(--acc)}
-.contact .btn.ghost{background:transparent;color:var(--acc-ink);border-color:var(--acc-ink)}
-.row{display:flex;flex-wrap:wrap;gap:10px}
-.hero-in{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}}
-@media(max-width:900px){
-.wrap{display:block}
-aside{position:static;height:auto;padding:28px 22px;border-right:0;border-bottom:1px solid var(--line);gap:18px}
-nav{flex-direction:row;gap:18px;flex-wrap:wrap}
-.side-foot{margin-top:0}
-main{padding:40px 22px 72px}
-.body,.lite,.skills{grid-template-columns:1fr}
-.proj summary{padding:20px}
-.metric{grid-column:1;grid-row:auto;text-align:left}
-.body{padding-inline:20px}
-.contact{padding:28px 22px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--s);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--a);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+#pg{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--a),var(--b));z-index:60}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 0;pointer-events:none}
+.nav div{pointer-events:auto;display:flex;align-items:center;gap:6px;padding:6px 8px 6px 18px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.nav b{font:700 15px var(--d);margin-right:10px}
+.nav a{text-decoration:none;padding:7px 12px;border-radius:999px;font-size:15px;font-weight:500;color:var(--mute)}
+.nav a:hover{color:var(--ink);background:var(--card)}
+.tg{border:1px solid var(--line);background:transparent;border-radius:999px;width:36px;height:36px;cursor:pointer}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+#bg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero .wrap{position:relative;z-index:1;pointer-events:none;padding-top:90px;padding-bottom:70px}
+.hero .wrap>*{pointer-events:auto}
+.pill{display:inline-flex;gap:9px;align-items:center;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--glass);font-size:14px;font-weight:500;margin-bottom:26px}
+.pill i{width:9px;height:9px;border-radius:50%;background:#20c26b;animation:pl 2s infinite}
+@keyframes pl{70%{box-shadow:0 0 0 9px #20c26b00}0%{box-shadow:0 0 0 0 #20c26baa}}
+h1{font:700 clamp(46px,11.5vw,158px)/.92 var(--d);letter-spacing:-.04em;margin:0 0 26px}
+h1 .l{display:block;overflow:hidden;padding-bottom:.08em}
+h1 .l span{display:inline-block;animation:up .9s cubic-bezier(.16,.9,.2,1) both}
+h1 .l:nth-child(2){background:linear-gradient(100deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .l:nth-child(2) span{color:transparent}
+@keyframes up{from{transform:translateY(105%) rotate(7deg)}}
+.role{font:500 clamp(20px,3vw,32px)/1.3 var(--d);margin:0 0 18px;letter-spacing:-.02em}
+#word{display:inline-block;color:var(--a);transition:.25s}
+#word.o{opacity:0;transform:translateY(10px)}
+.sub{max-width:34em;color:var(--mute);margin:0 0 32px;font-size:18px}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;text-decoration:none;cursor:pointer;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);padding:13px 24px;border-radius:999px;font-weight:700;transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-3px);background:var(--a);border-color:var(--a);color:#fff}
+.btn.g{background:transparent;color:var(--ink);border-color:var(--line)}
+.hint{position:absolute;bottom:22px;left:24px;font-size:14px;color:var(--mute);z-index:1}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-block:1px solid var(--line)}
+.stats div{padding:34px 20px;border-right:1px solid var(--line)}
+.stats div:last-child{border:0}
+.stats b{display:block;font:700 clamp(34px,5vw,60px)/1 var(--d);letter-spacing:-.03em}
+.stats span{color:var(--mute);font-size:15px}
+.mq{overflow:hidden;padding:22px 0;border-bottom:1px solid var(--line);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq div{display:flex;gap:44px;width:max-content;animation:mq 34s linear infinite}
+.mq span{font:500 22px var(--d);color:var(--mute);white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:110px 0 0}
+h2{font:700 clamp(32px,5vw,56px)/1.05 var(--d);letter-spacing:-.035em;margin:0 0 14px}
+.lede{color:var(--mute);max-width:32em;margin:0 0 26px}
+.ch{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.ch button{border:1.5px solid var(--line);background:transparent;border-radius:999px;padding:8px 18px;font-weight:500;cursor:pointer;transition:.2s}
+.ch button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.card{position:relative;text-align:left;cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;min-height:290px;display:flex;flex-direction:column;overflow:hidden;transition:transform .25s ease,border-color .25s;transform-style:preserve-3d;will-change:transform}
+.card[hidden]{display:none}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(360px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--a) 26%,transparent),transparent 60%);opacity:0;transition:opacity .25s;pointer-events:none}
+.card:hover{border-color:var(--a)}.card:hover::before{opacity:1}
+.card h3{font:700 23px/1.15 var(--d);letter-spacing:-.025em;margin:0 0 10px}
+.card p{margin:0;color:var(--mute);font-size:15.5px}
+.card .m{margin-top:auto;padding-top:26px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.card .m b{display:block;font:700 30px/1 var(--d);letter-spacing:-.03em;background:linear-gradient(100deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.card .m span{font-size:13.5px;color:var(--mute)}
+.card .x{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:22px;transition:.3s}
+.card:hover .x{transform:rotate(90deg);background:var(--a);border-color:var(--a);color:#fff}
+dialog{border:1px solid var(--line);border-radius:26px;background:var(--bg);color:var(--ink);padding:0;width:min(760px,calc(100vw - 28px));max-height:88vh;overflow:auto}
+dialog::backdrop{background:#05060fb3;backdrop-filter:blur(6px)}
+dialog[open]{animation:pop .35s cubic-bezier(.16,.9,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}}
+.in{padding:34px;position:relative}
+.in h3{font:700 clamp(26px,4vw,38px)/1.1 var(--d);letter-spacing:-.03em;margin:0 40px 14px 0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.tags span{font-size:13.5px;padding:3px 12px;border:1px solid var(--line);border-radius:999px;color:var(--mute)}
+.cs{display:grid;gap:18px}
+.cs h4{margin:0 0 4px;font-size:14px;color:var(--a);font-weight:700}
+.cs p{margin:0}
+.cl{position:absolute;top:18px;right:18px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-size:20px}
+.dr{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.aw{border:1px solid var(--line);border-radius:20px;padding:24px;background:var(--card)}
+.aw b{display:block;font:700 34px/1 var(--d);letter-spacing:-.04em;margin-bottom:12px;background:linear-gradient(100deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.aw p{margin:0;font-size:15.5px}
+.eq{display:inline-flex;gap:4px;align-items:flex-end;height:34px;margin-left:14px;vertical-align:middle}
+.eq i{width:6px;background:var(--b);border-radius:3px;animation:eq 1.1s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.45s}.eq i:nth-child(4){animation-delay:.1s}
+@keyframes eq{0%,100%{height:6px}50%{height:32px}}
+.sk{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.sk h4{margin:0 0 6px;font-size:16px}.sk p{margin:0;color:var(--mute);font-size:15.5px}
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.tl li{padding:0 0 22px 26px;position:relative}
+.tl li::before{content:"";position:absolute;left:-7px;top:9px;width:12px;height:12px;border-radius:50%;background:var(--a)}
+.tl b{display:block}.tl span{color:var(--mute);font-size:15.5px}
+.cta{margin:110px 0 0;padding:70px 0 56px;border-top:1px solid var(--line)}
+.cta h2{font-size:clamp(38px,8vw,110px);line-height:.95;max-width:9em}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--mute);font-size:14px;margin-top:60px}
+@media(max-width:820px){.stats,.dr,.sk{grid-template-columns:repeat(2,1fr)}.stats div:nth-child(2){border-right:0}.stats div{border-bottom:1px solid var(--line)}.nav a.h{display:none}.in{padding:26px 22px}section{padding-top:80px}}
+@media(max-width:480px){.dr,.sk{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<aside>
-  <div class="logo" aria-hidden="true">RS</div>
-  <div>
-    <h1>Rafie Susilo</h1>
-    <p>Computer Science, BINUS University. Building AI models and the tools around them.</p>
-  </div>
-  <nav aria-label="Sections">
-    <a href="#work">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#path">Background</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="side-foot">
-    <span class="status"><i></i>Open to internships</span>
-    <button class="btn ghost" id="theme" type="button">Switch theme</button>
-  </div>
-</aside>
+<div id="pg"></div>
+<header class="nav"><div>
+  <b>RS</b>
+  <a class="h" href="#work">Projects</a><a class="h" href="#drums">Drums</a><a class="h" href="#about">About</a><a href="#contact">Contact</a>
+  <button class="tg" id="tg" type="button" aria-label="Switch theme">◐</button>
+</div></header>
 
 <main>
-  <div class="hero-in">
-    <h2 class="lead" style="font-size:clamp(34px,5.2vw,64px);margin-bottom:24px">I train models, then build the <em>pipelines and interfaces</em> that put them to work.</h2>
-    <p class="sub">Computer vision, NLP, and financial data. I ship working apps, report results honestly (including the ones that did not work), and write down what I learned.</p>
-    <div class="stats">
-      <div><b>6</b><span>featured projects</span></div>
-      <div><b>3</b><span>research-style reports</span></div>
-      <div><b>271</b><span>on-chain wallets ranked</span></div>
-      <div><b>2028</b><span>expected graduation</span></div>
-    </div>
+<section class="hero" id="top" style="padding:0">
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="pill"><i></i>Open to internships</span>
+    <h1><span class="l"><span>Rafie</span></span><span class="l"><span style="animation-delay:.12s">Susilo.</span></span></h1>
+    <p class="role">I <span id="word">train models</span></p>
+    <p class="sub">Computer Science student at BINUS. I build AI and computer vision projects, financial data tools, and the interfaces that make them usable.</p>
+    <div class="row"><a class="btn" href="#work">See my projects</a><a class="btn g" href="#contact">Get in touch</a></div>
   </div>
+  <span class="hint">Click the grid to hit the drum.</span>
+</section>
 
-  <section id="work" style="margin-top:0">
-    <h2>Projects</h2>
-    <p class="sub" style="margin:0">Open any card for the problem, what I built, and what I took from it.</p>
-    <div class="filters" role="group" aria-label="Filter projects">
-      <button type="button" data-f="all" aria-pressed="true">All</button>
-      <button type="button" data-f="ai" aria-pressed="false">AI and vision</button>
-      <button type="button" data-f="fin" aria-pressed="false">Finance and quant</button>
-      <button type="button" data-f="web" aria-pressed="false">Full-stack</button>
-    </div>
-
-    <details class="proj" data-c="fin web">
-      <summary>
-        <h3>IrafAI Terminal</h3>
-        <p class="one">A Bloomberg-style dashboard for global and Indonesian markets.</p>
-        <div class="metric"><b>4 APIs</b><span>one unified view</span></div>
-        <div class="tags"><span>Next.js</span><span>FastAPI</span><span>PostgreSQL</span><span>yfinance</span><span>FRED</span></div>
-        <span class="plus"></span>
-      </summary>
-      <div class="body">
-        <div><h4>Problem</h4><p>Checking macro data, prices, and news means jumping across many tabs and sources.</p></div>
-        <div><h4>What I built</h4><p>A full-stack terminal that pulls from yfinance, Alpha Vantage, FRED, and NewsAPI into one dashboard, backed by a FastAPI service and PostgreSQL.</p></div>
-        <div><h4>What I learned</h4><p>Designing a data pipeline that survives rate limits and inconsistent APIs, and keeping a large project maintainable over months.</p></div>
-        <div class="links"><a class="btn" href="#">GitHub</a></div>
-      </div>
-    </details>
-
-    <details class="proj" data-c="ai web">
-      <summary>
-        <h3>Waste Classifier</h3>
-        <p class="one">Upload a photo, get the waste category and how confident the model is.</p>
-        <div class="metric"><b>95% / 77%</b><span>train / validation acc.</span></div>
-        <div class="tags"><span>TensorFlow</span><span>Keras</span><span>MobileNetV2</span><span>Streamlit</span></div>
-        <span class="plus"></span>
-      </summary>
-      <div class="body">
-        <div><h4>Problem</h4><p>Sorting waste correctly is hard to do by eye across six similar-looking classes: cardboard, glass, metal, paper, plastic, trash.</p></div>
-        <div><h4>What I built</h4><p>A MobileNetV2 transfer-learning model trained in Colab, wrapped in a Streamlit app with a probability chart and a warning when confidence is low.</p></div>
-        <div><h4>What I learned</h4><p>The gap between training and validation accuracy showed overfitting. Next steps: confusion matrix, augmentation, and error analysis per class.</p></div>
-        <div class="links"><a class="btn" href="#">GitHub</a><a class="btn ghost" href="#">Live demo</a></div>
-      </div>
-    </details>
-
-    <details class="proj" data-c="ai">
-      <summary>
-        <h3>Fire Detection: CNN vs MobileNetV2</h3>
-        <p class="one">A controlled comparison of a custom CNN and a pretrained model.</p>
-        <div class="metric"><b>Ablation</b><span>study included</span></div>
-        <div class="tags"><span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>Research paper</span></div>
-        <span class="plus"></span>
-      </summary>
-      <div class="body">
-        <div><h4>Problem</h4><p>Is a pretrained model worth it over a small custom CNN for fire images?</p></div>
-        <div><h4>What I built</h4><p>Two architectures trained under the same setup, then an ablation study to see which components actually mattered. Written up as a full paper and poster.</p></div>
-        <div><h4>What I learned</h4><p>How to design a fair comparison and report accuracy alongside compute cost.</p></div>
-        <div class="links"><a class="btn" href="#">Read the paper</a></div>
-      </div>
-    </details>
-
-    <details class="proj" data-c="ai">
-      <summary>
-        <h3>Sitting Posture Monitor</h3>
-        <p class="one">Real-time posture checks from a plain webcam.</p>
-        <div class="metric"><b>Real-time</b><span>classical CV pipeline</span></div>
-        <div class="tags"><span>Python</span><span>OpenCV</span><span>ORB</span><span>Haar Cascade</span><span>CLAHE</span></div>
-        <span class="plus"></span>
-      </summary>
-      <div class="body">
-        <div><h4>Problem</h4><p>Bad posture during long study sessions goes unnoticed.</p></div>
-        <div><h4>What I built</h4><p>A webcam pipeline using bilateral filtering and CLAHE for cleaner frames, with ORB features and Haar cascades for detection.</p></div>
-        <div><h4>What I learned</h4><p>Good preprocessing often beats a bigger model, especially under bad lighting.</p></div>
-        <div class="links"><a class="btn" href="#">GitHub</a></div>
-      </div>
-    </details>
-
-    <details class="proj" data-c="fin">
-      <summary>
-        <h3>Solana On-Chain Analytics Bots</h3>
-        <p class="one">Wallet tracking, signals, and copy-trading tooling built on live chain data.</p>
-        <div class="metric"><b>271</b><span>wallets ranked by win rate and PnL</span></div>
-        <div class="tags"><span>Python</span><span>Helius API</span><span>WebSocket</span><span>Jupiter API</span><span>Telegram</span></div>
-        <span class="plus"></span>
-      </summary>
-      <div class="body">
-        <div><h4>Problem</h4><p>On-chain activity moves fast and is hard to follow manually.</p></div>
-        <div><h4>What I built</h4><p>A smart-wallet tracker, a Telegram signal bot, and a copy-trade bot on Helius WebSocket and Jupiter, with retry and error handling.</p></div>
-        <div><h4>What I learned</h4><p>Working with streaming data, unreliable RPC responses, and latency-sensitive code.</p></div>
-        <div class="links"><a class="btn" href="#">GitHub</a></div>
-      </div>
-    </details>
-
-    <details class="proj" data-c="fin">
-      <summary>
-        <h3>XAU/USD Backtesting Research</h3>
-        <p class="one">Testing trading ideas properly, including catching the ones that fail.</p>
-        <div class="metric"><b>Train / test</b><span>split with overfitting checks</span></div>
-        <div class="tags"><span>Python</span><span>Pine Script</span><span>OANDA</span><span>MT5</span></div>
-        <span class="plus"></span>
-      </summary>
-      <div class="body">
-        <div><h4>Problem</h4><p>Many strategies look great on the data they were tuned on.</p></div>
-        <div><h4>What I built</h4><p>Backtests on 15m gold data for EMA and Heikin Ashi setups, with train/test validation and a multi-setup portfolio.</p></div>
-        <div><h4>What I learned</h4><p>No setup was consistently profitable, and performance decayed over time. That result pushed me toward regime-aware testing. This is a methodology study, not a profit claim.</p></div>
-      </div>
-    </details>
-
-    <h3 style="margin:36px 0 0;font-size:20px">Coursework</h3>
-    <div class="lite">
-      <div><b>Student Pass Prediction</b><p>Logistic Regression and Random Forest on a UCI dataset, deployed with Streamlit.</p></div>
-      <div><b>IMDB Sentiment</b><p>Naive Bayes vs LinearSVC on movie reviews.</p></div>
-      <div><b>Fonect</b><p>Campus lost-and-found app, PKM-KC proposal and team presentation.</p></div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div><h4>AI and computer vision</h4><p>Python, TensorFlow, Keras, OpenCV, scikit-learn, transfer learning</p></div>
-      <div><h4>Data and finance</h4><p>pandas, yfinance, backtesting, Pine Script, API pipelines</p></div>
-      <div><h4>Web and apps</h4><p>Next.js, FastAPI, PostgreSQL, Streamlit</p></div>
-      <div><h4>Tools</h4><p>Git and GitHub, Google Colab, Linux</p></div>
-    </div>
-  </section>
-
-  <section id="path">
-    <h2>Background</h2>
-    <ul class="tl">
-      <li><b>B.Sc. Computer Science, BINUS University</b><span>2024 to 2028. Machine Learning, NLP, Computer Vision, Software Engineering, Research Methodology.</span></li>
-      <li><b>Competitive drummer</b><span>1st Winner, Asia Pacific Arts Festival Drum 2023 (Thailand). 2nd Winner, 2022 (Malaysia). First Runner Up Champion, 2023 (Thailand). Best Solo Performance, Music Festival &amp; Education Fair Jabodetabek 2022.</span></li>
-      <li><b>Independent projects</b><span>Trading terminal, on-chain bots, and quantitative research alongside coursework.</span></li>
-    </ul>
-  </section>
-
-  <section id="contact">
-    <div class="contact">
-      <h2>Looking for an internship in AI, data, or fintech.</h2>
-      <p>If you have a team that needs someone who ships, tests honestly, and performs under pressure (drummers do), send me a message.</p>
-      <div class="row">
-        <button class="btn" id="copy" type="button">Copy email</button>
-        <a class="btn ghost" href="mailto:rafiesusilo@gmail.com">Email</a>
-        <a class="btn ghost" href="#">GitHub</a>
-        <a class="btn ghost" href="#">LinkedIn</a>
-      </div>
-    </div>
-  </section>
-</main>
+<div class="wrap">
+  <div class="stats">
+    <div><b class="n" data-to="8">0</b><span>featured projects</span></div>
+    <div><b class="n" data-to="271">0</b><span>on-chain wallets ranked</span></div>
+    <div><b class="n" data-to="4">0</b><span>drum competition awards</span></div>
+    <div><b class="n" data-to="2028">0</b><span>expected graduation</span></div>
+  </div>
 </div>
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="work"><div class="wrap">
+  <h2>Selected projects</h2>
+  <p class="lede">Click a card for the problem, what I built, and what I learned.</p>
+  <div class="ch" role="group" aria-label="Filter projects" id="ch">
+    <button type="button" data-f="all" aria-pressed="true">All</button>
+    <button type="button" data-f="ai" aria-pressed="false">AI and vision</button>
+    <button type="button" data-f="fin" aria-pressed="false">Finance and quant</button>
+    <button type="button" data-f="web" aria-pressed="false">Full-stack</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="drums"><div class="wrap">
+  <h2>Off the keyboard <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></h2>
+  <p class="lede">Years of competitive drumming taught me timing, practice discipline, and performing under pressure.</p>
+  <div class="dr">
+    <div class="aw"><b>1st</b><p>Winner, Asia Pacific Arts Festival Drum 2023, Thailand</p></div>
+    <div class="aw"><b>2nd</b><p>Winner, Asia Pacific Arts Festival Drum 2022, Malaysia</p></div>
+    <div class="aw"><b>Runner-up</b><p>First Runner Up Champion, Asia Pacific Arts Festival 2023, Thailand</p></div>
+    <div class="aw"><b>Best</b><p>Best Solo Performance, Music Festival &amp; Education Fair Jabodetabek 2022</p></div>
+  </div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <h2>Skills and background</h2>
+  <div class="sk" style="margin:30px 0 44px">
+    <div><h4>AI and vision</h4><p>Python, TensorFlow, Keras, OpenCV, scikit-learn, Transformers</p></div>
+    <div><h4>Data and finance</h4><p>pandas, yfinance, backtesting, Pine Script, API pipelines</p></div>
+    <div><h4>Web and apps</h4><p>Next.js, FastAPI, PostgreSQL, Chart.js, Streamlit</p></div>
+    <div><h4>Tools</h4><p>Git and GitHub, Google Colab, Linux</p></div>
+  </div>
+  <ul class="tl">
+    <li><b>B.Sc. Computer Science, BINUS University</b><span>2024 to 2028. Machine Learning, NLP, Computer Vision, Software Engineering, Research Methodology.</span></li>
+    <li><b>Independent projects</b><span>Trading terminal, on-chain bots, and quantitative research alongside coursework.</span></li>
+  </ul>
+</div></section>
+
+<section class="cta" id="contact"><div class="wrap">
+  <h2>Let's build something.</h2>
+  <p class="lede">Looking for an internship in AI, data, or fintech. Send me a message.</p>
+  <div class="row">
+    <button class="btn" id="cp" type="button">Copy email</button>
+    <a class="btn g" href="mailto:rafiesusilo@gmail.com">rafiesusilo@gmail.com</a>
+    <a class="btn g" href="#">GitHub</a><a class="btn g" href="#">LinkedIn</a>
+  </div>
+  <div class="foot"><span>© 2026 Rafie Susilo</span><a href="#top">Back to top</a></div>
+</div></section>
+</main>
+
+<dialog id="dlg"><div class="in">
+  <button class="cl" id="cl" type="button" aria-label="Close">×</button>
+  <h3 id="dt"></h3><div class="tags" id="dg"></div>
+  <div class="cs"><div><h4>Problem</h4><p id="dp"></p></div><div><h4>What I built</h4><p id="db"></p></div><div><h4>What I learned</h4><p id="dl"></p></div></div>
+  <div class="row" style="margin-top:26px"><a class="btn" href="#">GitHub</a></div>
+</div></dialog>
+
 <script>
 (function(){
-var root=document.documentElement,tb=document.getElementById('theme');
+var $=function(s){return document.querySelector(s)},RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var P=[
+{t:"IrafAI Terminal",c:"fin web",o:"A Bloomberg-style dashboard for global and Indonesian markets.",m:"4 APIs",ml:"one unified view",g:["Next.js","FastAPI","PostgreSQL","yfinance","FRED","NewsAPI"],p:"Checking macro data, prices, and news means jumping across many tabs and sources.",b:"A full-stack terminal pulling yfinance, Alpha Vantage, FRED, and NewsAPI into one dashboard, backed by a FastAPI service and PostgreSQL.",l:"Designing a data pipeline that survives rate limits and inconsistent APIs, and keeping a large project maintainable over months."},
+{t:"IDX Stock Analysis Dashboard",c:"fin web",o:"Charts, price history, and local news for Indonesian stocks on one page.",m:"IDX",ml:"Indonesian market",g:["JavaScript","Chart.js","yfinance","Local news"],p:"Analyzing an Indonesian stock means switching between chart sites and news sources.",b:"A full analysis dashboard with interactive Chart.js charts, historical data from yfinance, and local Indonesian news next to each stock.",l:"Combining price data and news into one readable view for faster decisions."},
+{t:"Waste Classifier",c:"ai web",o:"Upload a photo and get the waste category with a confidence score.",m:"77%",ml:"validation accuracy (95% train)",g:["TensorFlow","Keras","MobileNetV2","Streamlit","Colab"],p:"Sorting six similar-looking waste classes (cardboard, glass, metal, paper, plastic, trash) by eye is error-prone.",b:"A MobileNetV2 transfer-learning model trained in Colab, wrapped in a Streamlit app with a probability chart and a low-confidence warning.",l:"The gap between train and validation accuracy showed overfitting. Next: confusion matrix, augmentation, and per-class error analysis."},
+{t:"Fire Detection: CNN vs MobileNetV2",c:"ai",o:"A controlled comparison of a custom CNN and a pretrained model.",m:"Ablation",ml:"study included",g:["Python","TensorFlow","OpenCV","Research paper"],p:"Is a pretrained model worth it over a small custom CNN for fire images?",b:"Two architectures trained under the same setup, then an ablation study to see which components mattered. Written up as a full paper and poster.",l:"How to design a fair comparison and report accuracy alongside compute cost."},
+{t:"Fake News Detection",c:"ai",o:"A comparison of Transformer models for spotting fake news.",m:"Transformers",ml:"model comparison",g:["Python","Transformers","NLP","Research"],p:"Misinformation spreads faster than people can fact-check it.",b:"A comparative analysis of Transformer-based models on fake news classification, evaluated side by side.",l:"How to benchmark NLP models fairly and read results beyond a single accuracy number."},
+{t:"Sitting Posture Monitor",c:"ai",o:"Real-time posture checks from a plain webcam.",m:"Real-time",ml:"classical CV pipeline",g:["Python","OpenCV","ORB","Haar Cascade","CLAHE"],p:"Bad posture during long study sessions goes unnoticed.",b:"A webcam pipeline using bilateral filtering and CLAHE for cleaner frames, with ORB features and Haar cascades for detection.",l:"Good preprocessing often beats a bigger model, especially under bad lighting."},
+{t:"Solana On-Chain Analytics Bots",c:"fin",o:"Wallet tracking, signals, and copy-trading tools on live chain data.",m:"271",ml:"wallets ranked by win rate and PnL",g:["Python","Helius API","WebSocket","Jupiter API","Telegram"],p:"On-chain activity moves fast and is hard to follow manually.",b:"A smart-wallet tracker, a Telegram signal bot, and a copy-trade bot on Helius WebSocket and Jupiter, with retry and error handling.",l:"Working with streaming data, unreliable RPC responses, and latency-sensitive code."},
+{t:"XAU/USD Backtesting Research",c:"fin",o:"Testing trading ideas properly, including catching the ones that fail.",m:"Train/Test",ml:"overfitting checks",g:["Python","Pine Script","OANDA","MT5"],p:"Many strategies look great on the data they were tuned on.",b:"Backtests on 15m gold data for EMA and Heikin Ashi setups, with train/test validation and a multi-setup portfolio.",l:"No setup was consistently profitable and performance decayed over time, which pushed me toward regime-aware testing. This is a methodology study, not a profit claim."}
+];
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+var grid=$('#grid'),dlg=$('#dlg'),fine=matchMedia('(pointer:fine)').matches;
+P.forEach(function(p){
+var c=el('button','card');c.type='button';c.dataset.c=p.c;
+c.appendChild(el('h3',0,p.t));c.appendChild(el('p',0,p.o));
+var m=el('div','m'),d=el('div');d.appendChild(el('b',0,p.m));d.appendChild(el('span',0,p.ml));m.appendChild(d);m.appendChild(el('span','x','+'));c.appendChild(m);
+c.addEventListener('click',function(){
+$('#dt').textContent=p.t;$('#dp').textContent=p.p;$('#db').textContent=p.b;$('#dl').textContent=p.l;
+var g=$('#dg');g.textContent='';p.g.forEach(function(x){g.appendChild(el('span',0,x))});dlg.showModal()});
+if(fine&&!RM){
+c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+c.style.setProperty('--mx',x*100+'%');c.style.setProperty('--my',y*100+'%');
+c.style.transform='perspective(800px) rotateX('+((.5-y)*7)+'deg) rotateY('+((x-.5)*7)+'deg) translateY(-4px)'});
+c.addEventListener('pointerleave',function(){c.style.transform=''})}
+grid.appendChild(c)});
+$('#cl').onclick=function(){dlg.close()};
+dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+var bs=document.querySelectorAll('#ch button');
+bs.forEach(function(b){b.onclick=function(){bs.forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');
+var f=b.dataset.f;document.querySelectorAll('.card').forEach(function(c){c.hidden=!(f==='all'||c.dataset.c.split(' ').indexOf(f)>-1)})}});
+var mq=$('#mq'),st=["Python","TensorFlow","OpenCV","Transformers","FastAPI","Next.js","PostgreSQL","Streamlit","Chart.js","yfinance","Pine Script","Docker"];
+for(var k=0;k<2;k++)st.forEach(function(s){mq.appendChild(el('span',0,s))});
+var W=["train models","build dashboards","test honestly","study markets","play drums"],wi=0,w=$('#word');
+if(!RM)setInterval(function(){w.classList.add('o');setTimeout(function(){wi=(wi+1)%W.length;w.textContent=W[wi];w.classList.remove('o')},250)},2200);
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);
+var n=e.target,to=+n.dataset.to,t0=performance.now();
+if(RM){n.textContent=to;return}
+(function f(t){var q=Math.min(1,(t-t0)/1200);n.textContent=Math.round(to*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});
+document.querySelectorAll('.n').forEach(function(n){io.observe(n)});
+addEventListener('scroll',function(){var h=document.documentElement;$('#pg').style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+var root=document.documentElement;
 try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
-tb.addEventListener('click',function(){
-var dark=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);
-var n=dark?'light':'dark';root.setAttribute('data-theme',n);
-try{localStorage.setItem('theme',n)}catch(e){}
-});
-var btns=document.querySelectorAll('.filters button'),cards=document.querySelectorAll('.proj');
-btns.forEach(function(b){b.addEventListener('click',function(){
-btns.forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');
-var f=b.dataset.f;cards.forEach(function(c){c.hidden=!(f==='all'||c.dataset.c.split(' ').indexOf(f)>-1)});
-})});
-var cp=document.getElementById('copy');
-cp.addEventListener('click',function(){
-var mail='rafiesusilo@gmail.com';
-var done=function(){cp.textContent='Copied';setTimeout(function(){cp.textContent='Copy email'},1800)};
-try{navigator.clipboard.writeText(mail).then(done,function(){cp.textContent=mail})}catch(e){cp.textContent=mail}
-});
+var cv=$('#bg'),cx=cv.getContext('2d'),W0=0,H0=0,S=30,cols={},hits=[],ms={x:-999,y:-999},vis=true;
+function colors(){var c=getComputedStyle(root);cols.a=c.getPropertyValue('--a').trim();cols.b=c.getPropertyValue('--b').trim()}
+function size(){var d=Math.min(devicePixelRatio||1,2),r=cv.parentElement.getBoundingClientRect();W0=r.width;H0=r.height;cv.width=W0*d;cv.height=H0*d;cx.setTransform(d,0,0,d,0,0)}
+function hit(x,y){hits.push({x:x,y:y,t:performance.now()});if(hits.length>7)hits.shift()}
+function draw(now){cx.clearRect(0,0,W0,H0);
+for(var y=S/2;y<H0;y+=S)for(var x=S/2;x<W0;x+=S){var k=0;
+for(var i=0;i<hits.length;i++){var h=hits[i],a=(now-h.t)/1000;if(a>2)continue;var e=Math.abs(Math.hypot(x-h.x,y-h.y)-a*380);if(e<70)k=Math.max(k,(1-e/70)*(1-a/2))}
+var md=Math.hypot(x-ms.x,y-ms.y),m=md<120?1-md/120:0;
+cx.globalAlpha=Math.min(1,.26+k+m*.6);cx.fillStyle=k>.05?cols.b:cols.a;
+cx.beginPath();cx.arc(x,y,1.3+k*4.5+m*2.6,0,6.283);cx.fill()}
+cx.globalAlpha=1}
+$('#tg').onclick=function(){var d=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);
+var n=d?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}colors();if(RM)draw(0)};
+var cp=$('#cp');cp.onclick=function(){var m='rafiesusilo@gmail.com',ok=function(){cp.textContent='Copied';setTimeout(function(){cp.textContent='Copy email'},1800)};
+try{navigator.clipboard.writeText(m).then(ok,function(){cp.textContent=m})}catch(e){cp.textContent=m}};
+colors();size();addEventListener('resize',function(){size();if(RM)draw(0)});
+var hero=$('#top');
+hero.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();ms.x=e.clientX-r.left;ms.y=e.clientY-r.top});
+hero.addEventListener('pointerleave',function(){ms.x=ms.y=-999});
+hero.addEventListener('pointerdown',function(e){var r=cv.getBoundingClientRect();hit(e.clientX-r.left,e.clientY-r.top)});
+if(RM){draw(0)}else{
+new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(hero);
+setInterval(function(){if(vis)hit(W0*.75,H0*.45)},1250);
+(function loop(t){if(vis)draw(t);requestAnimationFrame(loop)})(performance.now())}
 })();
 </script>
 </body>
