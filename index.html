@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rafie Susilo | AI, Computer Vision & Quant Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f6;--panel:#fff;--ink:#101a2e;--mute:#56617a;--line:#d5dbe7;--acc:#2d4bff;--acc-ink:#fff;--hi:#ffb000;
+--sans:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1020;--panel:#121a2e;--ink:#e9eefb;--mute:#93a0bd;--line:#26314d;--acc:#7f93ff;--acc-ink:#0a1020;--hi:#ffc233}}
+:root[data-theme="dark"]{--bg:#0a1020;--panel:#121a2e;--ink:#e9eefb;--mute:#93a0bd;--line:#26314d;--acc:#7f93ff;--acc-ink:#0a1020;--hi:#ffc233}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:3px;border-radius:4px}
+.wrap{display:grid;grid-template-columns:320px minmax(0,1fr);max-width:1240px;margin:0 auto}
+aside{position:sticky;top:0;align-self:start;height:100vh;padding:48px 36px;display:flex;flex-direction:column;gap:28px;border-right:1px solid var(--line)}
+.logo{width:56px;height:56px;border-radius:50%;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font-weight:800;font-size:22px}
+aside h1{font-size:34px;line-height:1.05;margin:0;font-weight:800;letter-spacing:-.02em}
+aside p{margin:0;color:var(--mute);font-size:15px}
+nav{display:flex;flex-direction:column;gap:6px}
+nav a{text-decoration:none;padding:6px 0;font-weight:600;border-bottom:2px solid transparent;width:max-content}
+nav a:hover{border-color:var(--acc)}
+.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;font-size:15px}
+.status{display:inline-flex;gap:8px;align-items:center;font-size:14px;font-weight:600}
+.status i{width:10px;height:10px;border-radius:50%;background:#20c26b;box-shadow:0 0 0 0 #20c26b88;animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px #20c26b00}100%{box-shadow:0 0 0 0 #20c26b00}}
+.btn{font:inherit;font-weight:600;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-block;width:max-content}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:hover{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+main{padding:64px 48px 96px}
+.lead{font-size:clamp(34px,5.2vw,64px);line-height:1.02;font-weight:800;letter-spacing:-.03em;margin:0 0 24px;max-width:15em}
+.lead em{font-style:normal;background:linear-gradient(transparent 62%,var(--hi) 62% 92%,transparent 92%)}
+.sub{color:var(--mute);max-width:36em;margin:0 0 40px}
+.stats{display:flex;flex-wrap:wrap;gap:12px 40px;margin:0 0 72px;padding:20px 0;border-block:1px solid var(--line)}
+.stats div{display:flex;flex-direction:column}
+.stats b{font-family:var(--mono);font-size:26px;font-weight:500}
+.stats span{font-size:14px;color:var(--mute)}
+h2{font-size:30px;letter-spacing:-.02em;margin:0 0 8px;font-weight:800}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 28px}
+.filters button{font:inherit;font-size:15px;font-weight:600;padding:7px 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.proj{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:0 0 16px;overflow:hidden}
+.proj[hidden]{display:none}
+.proj summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:24px 28px;align-items:start}
+.proj summary::-webkit-details-marker{display:none}
+.proj h3{margin:0;font-size:24px;font-weight:800;letter-spacing:-.015em}
+.proj .one{grid-column:1;margin:4px 0 0;color:var(--mute);font-size:16px}
+.metric{grid-column:2;grid-row:1/3;text-align:right;font-family:var(--mono)}
+.metric b{display:block;font-size:30px;font-weight:500;color:var(--acc);line-height:1.1}
+.metric span{font-size:13px;color:var(--mute)}
+.tags{grid-column:1/3;display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tags span{font-size:13.5px;padding:2px 10px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.plus{grid-column:1/3;font-size:14px;font-weight:600;color:var(--acc)}
+.plus::after{content:"Read the case study"}
+.proj[open] .plus::after{content:"Close"}
+.body{padding:4px 28px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px dashed var(--line);padding-top:24px}
+.body h4{margin:0 0 6px;font-size:15px;color:var(--acc)}
+.body p{margin:0;font-size:15.5px}
+.body .links{grid-column:1/-1;display:flex;gap:10px}
+.lite{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.lite div{padding:18px;border:1px solid var(--line);border-radius:10px}
+.lite b{display:block;margin-bottom:4px}
+.lite p{margin:0;font-size:15px;color:var(--mute)}
+section{margin-top:88px}
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 40px;margin-top:20px}
+.skills h4{margin:0 0 6px;font-size:16px}
+.skills p{margin:0;color:var(--mute)}
+.tl{list-style:none;margin:20px 0 0;padding:0;border-left:2px solid var(--line)}
+.tl li{padding:0 0 22px 24px;position:relative}
+.tl li::before{content:"";position:absolute;left:-7px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--acc)}
+.tl b{display:block}
+.tl span{color:var(--mute);font-size:15px}
+.contact{padding:40px;border-radius:18px;background:var(--acc);color:var(--acc-ink)}
+.contact h2{font-size:clamp(28px,4vw,44px);max-width:14em}
+.contact p{max-width:34em;margin:0 0 22px}
+.contact .btn{background:var(--acc-ink);color:var(--acc)}
+.contact .btn.ghost{background:transparent;color:var(--acc-ink);border-color:var(--acc-ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.hero-in{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+@media(max-width:900px){
+.wrap{display:block}
+aside{position:static;height:auto;padding:28px 22px;border-right:0;border-bottom:1px solid var(--line);gap:18px}
+nav{flex-direction:row;gap:18px;flex-wrap:wrap}
+.side-foot{margin-top:0}
+main{padding:40px 22px 72px}
+.body,.lite,.skills{grid-template-columns:1fr}
+.proj summary{padding:20px}
+.metric{grid-column:1;grid-row:auto;text-align:left}
+.body{padding-inline:20px}
+.contact{padding:28px 22px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<aside>
+  <div class="logo" aria-hidden="true">RS</div>
+  <div>
+    <h1>Rafie Susilo</h1>
+    <p>Computer Science, BINUS University. Building AI models and the tools around them.</p>
+  </div>
+  <nav aria-label="Sections">
+    <a href="#work">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#path">Background</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="side-foot">
+    <span class="status"><i></i>Open to internships</span>
+    <button class="btn ghost" id="theme" type="button">Switch theme</button>
+  </div>
+</aside>
+
+<main>
+  <div class="hero-in">
+    <h2 class="lead" style="font-size:clamp(34px,5.2vw,64px);margin-bottom:24px">I train models, then build the <em>pipelines and interfaces</em> that put them to work.</h2>
+    <p class="sub">Computer vision, NLP, and financial data. I ship working apps, report results honestly (including the ones that did not work), and write down what I learned.</p>
+    <div class="stats">
+      <div><b>6</b><span>featured projects</span></div>
+      <div><b>3</b><span>research-style reports</span></div>
+      <div><b>271</b><span>on-chain wallets ranked</span></div>
+      <div><b>2028</b><span>expected graduation</span></div>
+    </div>
+  </div>
+
+  <section id="work" style="margin-top:0">
+    <h2>Projects</h2>
+    <p class="sub" style="margin:0">Open any card for the problem, what I built, and what I took from it.</p>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="ai" aria-pressed="false">AI and vision</button>
+      <button type="button" data-f="fin" aria-pressed="false">Finance and quant</button>
+      <button type="button" data-f="web" aria-pressed="false">Full-stack</button>
+    </div>
+
+    <details class="proj" data-c="fin web">
+      <summary>
+        <h3>IrafAI Terminal</h3>
+        <p class="one">A Bloomberg-style dashboard for global and Indonesian markets.</p>
+        <div class="metric"><b>4 APIs</b><span>one unified view</span></div>
+        <div class="tags"><span>Next.js</span><span>FastAPI</span><span>PostgreSQL</span><span>yfinance</span><span>FRED</span></div>
+        <span class="plus"></span>
+      </summary>
+      <div class="body">
+        <div><h4>Problem</h4><p>Checking macro data, prices, and news means jumping across many tabs and sources.</p></div>
+        <div><h4>What I built</h4><p>A full-stack terminal that pulls from yfinance, Alpha Vantage, FRED, and NewsAPI into one dashboard, backed by a FastAPI service and PostgreSQL.</p></div>
+        <div><h4>What I learned</h4><p>Designing a data pipeline that survives rate limits and inconsistent APIs, and keeping a large project maintainable over months.</p></div>
+        <div class="links"><a class="btn" href="#">GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="proj" data-c="ai web">
+      <summary>
+        <h3>Waste Classifier</h3>
+        <p class="one">Upload a photo, get the waste category and how confident the model is.</p>
+        <div class="metric"><b>95% / 77%</b><span>train / validation acc.</span></div>
+        <div class="tags"><span>TensorFlow</span><span>Keras</span><span>MobileNetV2</span><span>Streamlit</span></div>
+        <span class="plus"></span>
+      </summary>
+      <div class="body">
+        <div><h4>Problem</h4><p>Sorting waste correctly is hard to do by eye across six similar-looking classes: cardboard, glass, metal, paper, plastic, trash.</p></div>
+        <div><h4>What I built</h4><p>A MobileNetV2 transfer-learning model trained in Colab, wrapped in a Streamlit app with a probability chart and a warning when confidence is low.</p></div>
+        <div><h4>What I learned</h4><p>The gap between training and validation accuracy showed overfitting. Next steps: confusion matrix, augmentation, and error analysis per class.</p></div>
+        <div class="links"><a class="btn" href="#">GitHub</a><a class="btn ghost" href="#">Live demo</a></div>
+      </div>
+    </details>
+
+    <details class="proj" data-c="ai">
+      <summary>
+        <h3>Fire Detection: CNN vs MobileNetV2</h3>
+        <p class="one">A controlled comparison of a custom CNN and a pretrained model.</p>
+        <div class="metric"><b>Ablation</b><span>study included</span></div>
+        <div class="tags"><span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>Research paper</span></div>
+        <span class="plus"></span>
+      </summary>
+      <div class="body">
+        <div><h4>Problem</h4><p>Is a pretrained model worth it over a small custom CNN for fire images?</p></div>
+        <div><h4>What I built</h4><p>Two architectures trained under the same setup, then an ablation study to see which components actually mattered. Written up as a full paper and poster.</p></div>
+        <div><h4>What I learned</h4><p>How to design a fair comparison and report accuracy alongside compute cost.</p></div>
+        <div class="links"><a class="btn" href="#">Read the paper</a></div>
+      </div>
+    </details>
+
+    <details class="proj" data-c="ai">
+      <summary>
+        <h3>Sitting Posture Monitor</h3>
+        <p class="one">Real-time posture checks from a plain webcam.</p>
+        <div class="metric"><b>Real-time</b><span>classical CV pipeline</span></div>
+        <div class="tags"><span>Python</span><span>OpenCV</span><span>ORB</span><span>Haar Cascade</span><span>CLAHE</span></div>
+        <span class="plus"></span>
+      </summary>
+      <div class="body">
+        <div><h4>Problem</h4><p>Bad posture during long study sessions goes unnoticed.</p></div>
+        <div><h4>What I built</h4><p>A webcam pipeline using bilateral filtering and CLAHE for cleaner frames, with ORB features and Haar cascades for detection.</p></div>
+        <div><h4>What I learned</h4><p>Good preprocessing often beats a bigger model, especially under bad lighting.</p></div>
+        <div class="links"><a class="btn" href="#">GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="proj" data-c="fin">
+      <summary>
+        <h3>Solana On-Chain Analytics Bots</h3>
+        <p class="one">Wallet tracking, signals, and copy-trading tooling built on live chain data.</p>
+        <div class="metric"><b>271</b><span>wallets ranked by win rate and PnL</span></div>
+        <div class="tags"><span>Python</span><span>Helius API</span><span>WebSocket</span><span>Jupiter API</span><span>Telegram</span></div>
+        <span class="plus"></span>
+      </summary>
+      <div class="body">
+        <div><h4>Problem</h4><p>On-chain activity moves fast and is hard to follow manually.</p></div>
+        <div><h4>What I built</h4><p>A smart-wallet tracker, a Telegram signal bot, and a copy-trade bot on Helius WebSocket and Jupiter, with retry and error handling.</p></div>
+        <div><h4>What I learned</h4><p>Working with streaming data, unreliable RPC responses, and latency-sensitive code.</p></div>
+        <div class="links"><a class="btn" href="#">GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="proj" data-c="fin">
+      <summary>
+        <h3>XAU/USD Backtesting Research</h3>
+        <p class="one">Testing trading ideas properly, including catching the ones that fail.</p>
+        <div class="metric"><b>Train / test</b><span>split with overfitting checks</span></div>
+        <div class="tags"><span>Python</span><span>Pine Script</span><span>OANDA</span><span>MT5</span></div>
+        <span class="plus"></span>
+      </summary>
+      <div class="body">
+        <div><h4>Problem</h4><p>Many strategies look great on the data they were tuned on.</p></div>
+        <div><h4>What I built</h4><p>Backtests on 15m gold data for EMA and Heikin Ashi setups, with train/test validation and a multi-setup portfolio.</p></div>
+        <div><h4>What I learned</h4><p>No setup was consistently profitable, and performance decayed over time. That result pushed me toward regime-aware testing. This is a methodology study, not a profit claim.</p></div>
+      </div>
+    </details>
+
+    <h3 style="margin:36px 0 0;font-size:20px">Coursework</h3>
+    <div class="lite">
+      <div><b>Student Pass Prediction</b><p>Logistic Regression and Random Forest on a UCI dataset, deployed with Streamlit.</p></div>
+      <div><b>IMDB Sentiment</b><p>Naive Bayes vs LinearSVC on movie reviews.</p></div>
+      <div><b>Fonect</b><p>Campus lost-and-found app, PKM-KC proposal and team presentation.</p></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div><h4>AI and computer vision</h4><p>Python, TensorFlow, Keras, OpenCV, scikit-learn, transfer learning</p></div>
+      <div><h4>Data and finance</h4><p>pandas, yfinance, backtesting, Pine Script, API pipelines</p></div>
+      <div><h4>Web and apps</h4><p>Next.js, FastAPI, PostgreSQL, Streamlit</p></div>
+      <div><h4>Tools</h4><p>Git and GitHub, Google Colab, Linux</p></div>
+    </div>
+  </section>
+
+  <section id="path">
+    <h2>Background</h2>
+    <ul class="tl">
+      <li><b>B.Sc. Computer Science, BINUS University</b><span>2024 to 2028. Machine Learning, NLP, Computer Vision, Software Engineering, Research Methodology.</span></li>
+      <li><b>Competitive drummer</b><span>1st Winner, Asia Pacific Arts Festival Drum 2023 (Thailand). 2nd Winner, 2022 (Malaysia). First Runner Up Champion, 2023 (Thailand). Best Solo Performance, Music Festival &amp; Education Fair Jabodetabek 2022.</span></li>
+      <li><b>Independent projects</b><span>Trading terminal, on-chain bots, and quantitative research alongside coursework.</span></li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <h2>Looking for an internship in AI, data, or fintech.</h2>
+      <p>If you have a team that needs someone who ships, tests honestly, and performs under pressure (drummers do), send me a message.</p>
+      <div class="row">
+        <button class="btn" id="copy" type="button">Copy email</button>
+        <a class="btn ghost" href="mailto:rafiesusilo@gmail.com">Email</a>
+        <a class="btn ghost" href="#">GitHub</a>
+        <a class="btn ghost" href="#">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+<script>
+(function(){
+var root=document.documentElement,tb=document.getElementById('theme');
+try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
+tb.addEventListener('click',function(){
+var dark=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);
+var n=dark?'light':'dark';root.setAttribute('data-theme',n);
+try{localStorage.setItem('theme',n)}catch(e){}
+});
+var btns=document.querySelectorAll('.filters button'),cards=document.querySelectorAll('.proj');
+btns.forEach(function(b){b.addEventListener('click',function(){
+btns.forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');
+var f=b.dataset.f;cards.forEach(function(c){c.hidden=!(f==='all'||c.dataset.c.split(' ').indexOf(f)>-1)});
+})});
+var cp=document.getElementById('copy');
+cp.addEventListener('click',function(){
+var mail='rafiesusilo@gmail.com';
+var done=function(){cp.textContent='Copied';setTimeout(function(){cp.textContent='Copy email'},1800)};
+try{navigator.clipboard.writeText(mail).then(done,function(){cp.textContent=mail})}catch(e){cp.textContent=mail}
+});
+})();
+</script>
+</body>
+</html>
